@@ -18,88 +18,83 @@ import {
   Network,
   Terminal,
   Puzzle,
-  TrendingUp
+  TrendingUp,
+  ExternalLink
 } from "lucide-react"
 
-const heroItem = { initial: { opacity: 0, y: 10 }, animate: { opacity: 1, y: 0 } }
-const heroTransition = { duration: 0.3, ease: "easeOut" as const }
+const fadeIn = { initial: { opacity: 0, y: 10 }, animate: { opacity: 1, y: 0 } }
+const transition = { duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }
 
 export function IntroductionContent() {
   return (
-    <div className="space-y-12">
+    <div className="space-y-14">
       {/* Hero Section */}
       <section className="relative">
-        {/* Background decoration - low opacity, no glow */}
-        <div className="absolute -top-20 -left-20 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
-        <div className="absolute -top-10 right-0 w-48 h-48 bg-accent/5 rounded-full blur-3xl" />
-        
         <div className="relative">
-          <motion.div initial={heroItem.initial} animate={heroItem.animate} transition={{ ...heroTransition, delay: 0 }}>
-            <Badge variant="outline" className="mb-4">
+          <motion.div {...fadeIn} transition={{ ...transition, delay: 0 }}>
+            <Badge variant="outline" className="mb-4 font-medium">
               Multi-chain DEX Aggregator
             </Badge>
           </motion.div>
           
           <motion.h1
-            initial={heroItem.initial}
-            animate={heroItem.animate}
-            transition={{ ...heroTransition, delay: 0.06 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-balance"
+            {...fadeIn}
+            transition={{ ...transition, delay: 0.05 }}
+            className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-balance"
           >
             <span className="gradient-text">One integration.</span>
             <br />
-            <span className="text-foreground">Every chain. Every asset.</span>
+            <span className="text-foreground">Every chain. Best rates.</span>
           </motion.h1>
           
           <motion.p
-            initial={heroItem.initial}
-            animate={heroItem.animate}
-            transition={{ ...heroTransition, delay: 0.12 }}
-            className="mt-6 text-lg md:text-xl text-muted-foreground max-w-3xl text-pretty leading-relaxed"
+            {...fadeIn}
+            transition={{ ...transition, delay: 0.1 }}
+            className="mt-5 text-base md:text-lg text-muted-foreground max-w-3xl text-pretty leading-relaxed"
           >
-            OpenOcean is a leading <strong className="text-foreground">multi-chain DEX aggregator</strong> built 
-            for Web3 wallets, trading platforms, and professional traders. With a single integration, 
-            get access to the best swap rates, deep liquidity, and reliable execution across{" "}
-            <strong className="text-foreground">40+ chains</strong> — including EVM and non-EVM networks 
-            such as Solana and Sui.
+            OpenOcean is a leading <strong className="text-foreground font-medium">multi-chain DEX aggregator</strong> built 
+            for Web3 wallets, trading platforms, and professional traders. Access the best swap rates, 
+            deep liquidity, and reliable execution across{" "}
+            <strong className="text-foreground font-medium">40+ chains</strong> with a single API.
           </motion.p>
 
           <motion.div
-            initial={heroItem.initial}
-            animate={heroItem.animate}
-            transition={{ ...heroTransition, delay: 0.18 }}
-            className="mt-8 flex flex-wrap gap-4"
+            {...fadeIn}
+            transition={{ ...transition, delay: 0.15 }}
+            className="mt-8 flex flex-wrap gap-3"
           >
-            <Button size="lg" className="gap-2 group" asChild>
-              <a href="https://openocean.finance/" target="_blank" rel="noopener noreferrer">
-                Get Started
+            <Button size="lg" className="gap-2 group h-11" asChild>
+              <Link href="/docs/swap-api/guide">
+                Quick Start
                 <Zap className="h-4 w-4 transition-transform duration-200 group-hover:rotate-12" />
-              </a>
-            </Button>
-            <Button size="lg" variant="outline" className="gap-2" asChild>
-              <Link href="/docs/swap-api">
-                <Terminal className="h-4 w-4" />
-                View API Reference
               </Link>
+            </Button>
+            <Button size="lg" variant="outline" className="gap-2 h-11" asChild>
+              <a href="https://openocean.finance/" target="_blank" rel="noopener noreferrer">
+                Launch App
+                <ExternalLink className="h-3.5 w-3.5" />
+              </a>
             </Button>
           </motion.div>
 
-          {/* Stats */}
+          {/* Stats Row */}
           <motion.div
-            initial={heroItem.initial}
-            animate={heroItem.animate}
-            transition={{ ...heroTransition, delay: 0.24 }}
-            className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8"
+            {...fadeIn}
+            transition={{ ...transition, delay: 0.2 }}
+            className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6"
           >
             {[
-              { label: "Supported Chains", value: "40+" },
+              { label: "Chains", value: "40+" },
               { label: "Liquidity Sources", value: "1,000+" },
               { label: "DEXs Integrated", value: "500+" },
-              { label: "API Uptime", value: "99.9%" },
-            ].map((stat) => (
-              <div key={stat.label} className="text-center md:text-left">
-                <div className="text-3xl md:text-4xl font-bold gradient-text">{stat.value}</div>
-                <div className="text-sm text-muted-foreground mt-1">{stat.label}</div>
+              { label: "Uptime", value: "99.9%" },
+            ].map((stat, i) => (
+              <div 
+                key={stat.label} 
+                className="flex flex-col items-center md:items-start p-4 rounded-lg border border-border/30 bg-card/30"
+              >
+                <div className="text-2xl md:text-3xl font-bold text-foreground">{stat.value}</div>
+                <div className="text-xs text-muted-foreground mt-0.5">{stat.label}</div>
               </div>
             ))}
           </motion.div>
@@ -107,46 +102,46 @@ export function IntroductionContent() {
       </section>
 
       {/* What OpenOcean Provides */}
-      <section id="what-openocean-provides" className="scroll-mt-20">
-        <h2 className="text-2xl md:text-3xl font-bold mb-4">What OpenOcean Provides</h2>
-        <p className="text-muted-foreground mb-8 max-w-3xl">
-          OpenOcean gives you a unified API surface for the main DeFi primitives you need:
+      <section id="what-openocean-provides" className="scroll-mt-24">
+        <h2 className="text-xl md:text-2xl font-semibold mb-3">What OpenOcean Provides</h2>
+        <p className="text-muted-foreground mb-6 max-w-3xl text-sm">
+          A unified API surface for the core DeFi primitives you need:
         </p>
 
         <CardGroup columns={3}>
           <FeatureCard
             title="Same-chain Swap"
-            description="Best-rate token swaps on 40+ chains via aggregated DEX liquidity (AMMs, RFQ, launchpads)."
+            description="Best-rate swaps on 40+ chains via aggregated DEX liquidity."
             icon={<ArrowRightLeft className="h-5 w-5" />}
             href="/docs/swap-api"
           />
           <FeatureCard
             title="Cross-chain Swap"
-            description="Cross-chain swaps and bridge flows with optimal routing and execution."
+            description="Seamless cross-chain swaps with optimal routing."
             icon={<Globe className="h-5 w-5" />}
             href="/docs/swap-api"
           />
           <FeatureCard
-            title="Limit Order"
-            description="Gasless, non-custodial limit orders that execute when market conditions match."
+            title="Limit Orders"
+            description="Gasless, non-custodial limit orders that execute at your price."
             icon={<TrendingUp className="h-5 w-5" />}
-            href="/docs/limit-order-api"
+            href="/docs/limit-order-api/guide"
           />
           <FeatureCard
             title="DCA"
-            description="Dollar Cost Averaging with recurring buys at preset intervals with gasless execution."
+            description="Dollar cost averaging with automated recurring buys."
             icon={<LayoutGrid className="h-5 w-5" />}
             href="/docs/dca-api/guide"
           />
           <FeatureCard
             title="Zap"
-            description="Single- or dual-token zap-in/out for LPs and staking vaults."
+            description="Single-transaction LP deposits and withdrawals."
             icon={<Zap className="h-5 w-5" />}
             href="/docs/zap-api/api"
           />
           <FeatureCard
             title="Gasless Swap"
-            description="Batch sweeps and gasless swap options for specific chains and use cases."
+            description="Zero-gas trading for supported chains and tokens."
             icon={<Shield className="h-5 w-5" />}
             href="/docs/gasless-swap-api"
           />
@@ -154,105 +149,105 @@ export function IntroductionContent() {
       </section>
 
       {/* How It Works */}
-      <section id="how-it-works" className="scroll-mt-20">
-        <h2 className="text-2xl md:text-3xl font-bold mb-4">How It Works</h2>
-        <p className="text-muted-foreground mb-8 max-w-3xl">
-          OpenOcean follows a clear pipeline from liquidity to execution:
+      <section id="how-it-works" className="scroll-mt-24">
+        <h2 className="text-xl md:text-2xl font-semibold mb-3">How It Works</h2>
+        <p className="text-muted-foreground mb-6 max-w-3xl text-sm">
+          A clear pipeline from liquidity aggregation to transaction execution:
         </p>
 
         <Steps
           variant="horizontal"
           steps={[
             {
-              title: "Aggregate Liquidity",
-              description: "Connect to 1,000+ liquidity sources across supported chains.",
+              title: "Aggregate",
+              description: "Connect to 1,000+ liquidity sources.",
             },
             {
-              title: "Normalize Paths",
-              description: "Standardize routes and token representations.",
+              title: "Route",
+              description: "Compute the optimal swap path.",
             },
             {
-              title: "Compute Best Route",
-              description: "Smart order routing finds the best price and path.",
+              title: "Quote",
+              description: "Return best price and calldata.",
             },
             {
-              title: "Return Transaction",
-              description: "Ready-to-sign calldata; we do not custody funds.",
+              title: "Execute",
+              description: "User signs and broadcasts.",
             },
           ]}
         />
 
-        <div className="mt-8 p-6 rounded-xl border border-border bg-muted/30">
+        <div className="mt-8 p-5 rounded-xl border border-border/40 bg-muted/20">
           <p className="text-sm text-muted-foreground">
             <strong className="text-foreground">Integration Flow:</strong> Call{" "}
-            <code className="rounded bg-muted px-1.5 py-0.5 text-primary">Quote</code> to get 
-            the best route, then <code className="rounded bg-muted px-1.5 py-0.5 text-primary">Swap</code> to 
-            get the transaction body. Your app or user signs and broadcasts the transaction.
+            <code className="rounded bg-muted px-1.5 py-0.5 text-xs text-primary font-medium border border-border/30">Quote</code> to get 
+            the best route, then <code className="rounded bg-muted px-1.5 py-0.5 text-xs text-primary font-medium border border-border/30">Swap</code> to 
+            get the transaction body. Your app or user signs and broadcasts.
           </p>
         </div>
       </section>
 
       {/* Core Capabilities */}
-      <section id="core-capabilities" className="scroll-mt-20">
-        <h2 className="text-2xl md:text-3xl font-bold mb-4">Core Capabilities</h2>
+      <section id="core-capabilities" className="scroll-mt-24">
+        <h2 className="text-xl md:text-2xl font-semibold mb-3">Core Capabilities</h2>
         
         <CardGroup columns={2}>
           <FeatureCard
-            title="Multi-chain DEX Aggregation"
-            description="One API for 40+ chains and 1,000+ liquidity sources; no need to integrate each DEX separately."
+            title="Multi-chain Aggregation"
+            description="One API for 40+ chains and 1,000+ liquidity sources. No per-DEX integrations."
             icon={<Globe className="h-5 w-5" />}
           />
           <FeatureCard
             title="Smart Order Routing"
-            description="Optimal path and pricing for each request; we handle split routes and multi-hop when they improve the outcome."
+            description="Optimal path and pricing with automatic split routes and multi-hop when beneficial."
             icon={<Network className="h-5 w-5" />}
           />
           <FeatureCard
-            title="Wide Chain Coverage"
-            description="EVM (Ethereum, BNB Chain, Arbitrum, Base) and non-EVM (Solana, Sui) with a single integration."
+            title="EVM & Non-EVM"
+            description="Support for Ethereum, BNB Chain, Arbitrum, and non-EVM chains like Solana and Sui."
             icon={<Layers className="h-5 w-5" />}
           />
           <FeatureCard
             title="Deep Liquidity"
-            description="Access to major AMMs (Uniswap, Balancer, PancakeSwap, Curve), RFQ, and DeFi launchpads."
+            description="Access to Uniswap, Balancer, PancakeSwap, Curve, RFQ, and private liquidity."
             icon={<TrendingUp className="h-5 w-5" />}
           />
           <FeatureCard
             title="Developer-friendly"
-            description="REST API, SDK, and Widget; clear docs, examples, and error handling so you can integrate quickly."
+            description="REST API, SDK, and Widget with clear docs and comprehensive examples."
             icon={<Code2 className="h-5 w-5" />}
           />
           <FeatureCard
             title="Non-custodial"
-            description="We never custody your funds. All transactions are signed and broadcast by the user."
+            description="We never custody funds. All transactions are signed by users."
             icon={<Shield className="h-5 w-5" />}
           />
         </CardGroup>
       </section>
 
       {/* Next Steps */}
-      <section id="next-steps" className="scroll-mt-20">
-        <h2 className="text-2xl md:text-3xl font-bold mb-6">Next Steps</h2>
-        <p className="text-muted-foreground mb-8 max-w-3xl">
-          Choose how you want to integrate and get started:
+      <section id="next-steps" className="scroll-mt-24">
+        <h2 className="text-xl md:text-2xl font-semibold mb-4">Get Started</h2>
+        <p className="text-muted-foreground mb-6 max-w-3xl text-sm">
+          Choose how you want to integrate:
         </p>
 
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className="grid gap-3 md:grid-cols-3">
           <NextStepCard
             title="API Reference"
-            description="Use REST API for quote, swap, token list, gas, and more."
+            description="Full REST API documentation for quotes, swaps, and more."
             href="/docs/swap-api"
             icon={<Terminal className="h-5 w-5" />}
           />
           <NextStepCard
-            title="SDK Integration"
-            description="Type-safe, high-level integration for your app."
+            title="SDK"
+            description="Type-safe TypeScript SDK for rapid integration."
             href="/docs/swap-api/sdk"
             icon={<Code2 className="h-5 w-5" />}
           />
           <NextStepCard
             title="Widget"
-            description="Ready-made swap UI with minimal code; customize theme and flows."
+            description="Drop-in swap UI component with full customization."
             href="/docs/widget"
             icon={<Puzzle className="h-5 w-5" />}
           />
