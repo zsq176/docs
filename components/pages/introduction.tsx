@@ -16,12 +16,12 @@ import {
   ArrowRightLeft,
   LayoutGrid,
   Network,
-  Terminal,
   Puzzle,
   TrendingUp,
   ExternalLink,
   Bot,
-  FileCode
+  FileCode,
+  CheckCircle2
 } from "lucide-react"
 
 const fadeIn = { initial: { opacity: 0, y: 10 }, animate: { opacity: 1, y: 0 } }
@@ -44,7 +44,7 @@ export function IntroductionContent() {
             transition={{ ...transition, delay: 0.05 }}
             className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-balance"
           >
-            <span className="gradient-text">One integration.</span>
+            <span className="text-primary">One integration.</span>
             <br />
             <span className="text-foreground">Every chain. Best rates.</span>
           </motion.h1>
@@ -261,9 +261,9 @@ export function IntroductionContent() {
             icon={<Zap className="h-5 w-5" />}
           />
           <NextStepCard
-            title="API Reference"
+            title="API V4"
             description="Full REST API documentation."
-            href="/docs/api-reference"
+            href="/docs/swap-api/v4"
             icon={<FileCode className="h-5 w-5" />}
           />
           <NextStepCard

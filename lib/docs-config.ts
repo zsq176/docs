@@ -94,11 +94,11 @@ export const docsConfig: DocsConfig = {
     },
     {
       title: "Advanced",
-      href: "/docs/swap-api/advanced-usage",
+      href: "/docs/advanced",
       description: "Advanced features",
       icon: "Settings",
       items: [
-        { title: "Overview", href: "/docs/swap-api/advanced-usage", description: "Advanced intro" },
+        { title: "Overview", href: "/docs/advanced", description: "Advanced intro" },
         { title: "GMX Exclusive", href: "/docs/swap-api/advanced-usage/gmx-exclusive-api", description: "GMX integration" },
         { title: "Exact Out", href: "/docs/swap-api/advanced-usage/exact-out", description: "Output specification" },
         { title: "Sweep Swap", href: "/docs/sweep-swap-api/guide", description: "Batch swaps" },
