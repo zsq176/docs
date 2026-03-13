@@ -24,7 +24,11 @@ import {
   Bot,
   FileCode,
   Command,
-  BookOpen
+  BookOpen,
+  Zap,
+  ListOrdered,
+  Settings,
+  Circle
 } from "lucide-react"
 import { useTheme } from "next-themes"
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet"
@@ -40,6 +44,11 @@ const iconMap: Record<string, React.ElementType> = {
   Bot,
   FileCode,
   BookOpen,
+  Zap,
+  ListOrdered,
+  Settings,
+  Circle,
+  Sparkles,
 }
 
 export function Header() {
