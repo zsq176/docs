@@ -9,9 +9,6 @@ node_modules/
 .env*.local
 .DS_Store
 
-# Legacy location (code moved to repo root)
-ui/
-
 # Node.js
 node_modules/
 .npm/
