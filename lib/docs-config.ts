@@ -33,6 +33,8 @@ export const docsConfig: DocsConfig = {
         { title: "Why OpenOcean", href: "/docs/why-openocean", description: "Our advantages and vision" },
         { title: "Architecture", href: "/docs/architecture", description: "System architecture overview" },
         { title: "Use Cases", href: "/docs/use-cases", description: "Real-world integration examples" },
+        { title: "Supported Chains", href: "/docs/supported-chains", description: "40+ blockchain networks" },
+        { title: "Contracts", href: "/docs/contracts", description: "Smart contract addresses" },
       ],
     },
     {
@@ -105,6 +107,49 @@ export const docsConfig: DocsConfig = {
       ],
     },
     {
+      title: "API Reference",
+      href: "/docs/api-reference",
+      description: "Complete API documentation",
+      icon: "FileCode",
+      items: [
+        { title: "Overview", href: "/docs/api-reference", description: "API reference introduction" },
+        { 
+          title: "Swap API",
+          items: [
+            { title: "API V4", href: "/docs/swap-api/v4", badge: "Recommended", description: "Latest stable API" },
+            { title: "API V3", href: "/docs/swap-api/v3", description: "Legacy API version" },
+          ]
+        },
+        { 
+          title: "Gasless API",
+          items: [
+            { title: "Endpoints", href: "/docs/gasless-swap-api/api", description: "Gasless swap endpoints" },
+          ]
+        },
+        { 
+          title: "DCA API",
+          items: [
+            { title: "Endpoints", href: "/docs/dca-api/api", description: "DCA endpoints" },
+            { title: "WebSocket", href: "/docs/dca-api/websocket/guide", description: "Real-time updates" },
+          ]
+        },
+        { 
+          title: "Limit Order API",
+          items: [
+            { title: "Endpoints", href: "/docs/limit-order-api/api", description: "Limit order endpoints" },
+          ]
+        },
+        { 
+          title: "Zap API",
+          items: [
+            { title: "Endpoints", href: "/docs/zap-api/api", description: "Zap endpoints" },
+          ]
+        },
+        { title: "Solana API", href: "/docs/solana-swap-api", description: "Solana-specific API" },
+        { title: "Swagger", href: "https://open-api.openocean.finance/v4/swagger-ui.html", external: true, description: "Interactive API docs" },
+      ],
+    },
+    {
       title: "Chains",
       href: "/docs/supported-chains",
       description: "Supported networks",
@@ -112,7 +157,7 @@ export const docsConfig: DocsConfig = {
       items: [
         { title: "Supported Chains", href: "/docs/supported-chains", description: "40+ blockchain networks" },
         { title: "Contracts", href: "/docs/contracts", description: "Smart contract addresses" },
-        { title: "Solana API", href: "/docs/solana-swap-api", description: "Solana-specific features" },
+        { title: "Solana", href: "/docs/solana-swap-api", description: "Solana-specific features" },
         {
           title: "Zap API",
           items: [
@@ -155,7 +200,7 @@ export const docsConfig: DocsConfig = {
       title: "Resources",
       href: "/docs/developer-resources/errors",
       description: "Developer tools",
-      icon: "FileCode",
+      icon: "BookOpen",
       items: [
         { title: "Error Codes", href: "/docs/developer-resources/errors", description: "Error reference" },
         { title: "Glossary", href: "/docs/developer-resources/glossary", description: "Technical terms" },
@@ -168,11 +213,22 @@ export const docsConfig: DocsConfig = {
 
 // Helper function to get sidebar items for a given path
 export function getSidebarItemsForPath(pathname: string): NavItem[] {
+  // Special handling for root path
+  if (pathname === "/" || pathname === "") {
+    return docsConfig.primaryNav[0].items
+  }
+  
   for (const category of docsConfig.primaryNav) {
-    // Check if current path belongs to this category
-    if (pathname === category.href || pathname.startsWith(category.href + "/")) {
+    // Check if current path exactly matches category href
+    if (pathname === category.href) {
       return category.items
     }
+    
+    // Check if current path starts with category href (for sub-pages)
+    if (category.href !== "/" && pathname.startsWith(category.href + "/")) {
+      return category.items
+    }
+    
     // Check nested items
     for (const item of category.items) {
       if (item.href && (pathname === item.href || pathname.startsWith(item.href + "/"))) {
@@ -193,10 +249,20 @@ export function getSidebarItemsForPath(pathname: string): NavItem[] {
 
 // Helper to get current category
 export function getCurrentCategory(pathname: string): CategoryConfig {
+  // Special handling for root path
+  if (pathname === "/" || pathname === "") {
+    return docsConfig.primaryNav[0]
+  }
+  
   for (const category of docsConfig.primaryNav) {
-    if (pathname === category.href || pathname.startsWith(category.href + "/")) {
+    if (pathname === category.href) {
       return category
     }
+    
+    if (category.href !== "/" && pathname.startsWith(category.href + "/")) {
+      return category
+    }
+    
     for (const item of category.items) {
       if (item.href && (pathname === item.href || pathname.startsWith(item.href + "/"))) {
         return category

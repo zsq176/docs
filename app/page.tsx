@@ -8,10 +8,10 @@ export const metadata: Metadata = {
 }
 
 const tocItems = [
-  { id: "what-openocean-provides", title: "What OpenOcean Provides", level: 2 },
+  { id: "products", title: "Products & Features", level: 2 },
   { id: "how-it-works", title: "How It Works", level: 2 },
   { id: "core-capabilities", title: "Core Capabilities", level: 2 },
-  { id: "next-steps", title: "Next Steps", level: 2 },
+  { id: "next-steps", title: "Get Started", level: 2 },
 ]
 
 export default function Home() {

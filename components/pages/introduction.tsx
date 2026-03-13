@@ -19,7 +19,9 @@ import {
   Terminal,
   Puzzle,
   TrendingUp,
-  ExternalLink
+  ExternalLink,
+  Bot,
+  FileCode
 } from "lucide-react"
 
 const fadeIn = { initial: { opacity: 0, y: 10 }, animate: { opacity: 1, y: 0 } }
@@ -27,7 +29,7 @@ const transition = { duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }
 
 export function IntroductionContent() {
   return (
-    <div className="space-y-14">
+    <div className="space-y-16">
       {/* Hero Section */}
       <section className="relative">
         <div className="relative">
@@ -88,7 +90,7 @@ export function IntroductionContent() {
               { label: "Liquidity Sources", value: "1,000+" },
               { label: "DEXs Integrated", value: "500+" },
               { label: "Uptime", value: "99.9%" },
-            ].map((stat, i) => (
+            ].map((stat) => (
               <div 
                 key={stat.label} 
                 className="flex flex-col items-center md:items-start p-4 rounded-lg border border-border/30 bg-card/30"
@@ -101,49 +103,68 @@ export function IntroductionContent() {
         </div>
       </section>
 
-      {/* What OpenOcean Provides */}
-      <section id="what-openocean-provides" className="scroll-mt-24">
-        <h2 className="text-xl md:text-2xl font-semibold mb-3">What OpenOcean Provides</h2>
+      {/* Products Overview */}
+      <section id="products" className="scroll-mt-24">
+        <h2 className="text-xl md:text-2xl font-semibold mb-3">Products & Features</h2>
         <p className="text-muted-foreground mb-6 max-w-3xl text-sm">
           A unified API surface for the core DeFi primitives you need:
         </p>
 
         <CardGroup columns={3}>
           <FeatureCard
-            title="Same-chain Swap"
-            description="Best-rate swaps on 40+ chains via aggregated DEX liquidity."
+            title="Swap API"
+            description="Multi-chain DEX aggregation API with smart order routing. Find the best prices across 1,000+ liquidity sources on 40+ chains."
             icon={<ArrowRightLeft className="h-5 w-5" />}
             href="/docs/swap-api"
           />
           <FeatureCard
-            title="Cross-chain Swap"
-            description="Seamless cross-chain swaps with optimal routing."
-            icon={<Globe className="h-5 w-5" />}
-            href="/docs/swap-api"
+            title="Gasless Swap"
+            description="Zero-gas trading with Permit2. Users sign one message for approval and swap combined, no native gas tokens needed."
+            icon={<Shield className="h-5 w-5" />}
+            href="/docs/gasless-swap-api"
           />
           <FeatureCard
             title="Limit Orders"
-            description="Gasless, non-custodial limit orders that execute at your price."
+            description="Non-custodial limit orders that execute automatically when your target price is reached."
             icon={<TrendingUp className="h-5 w-5" />}
             href="/docs/limit-order-api/guide"
           />
           <FeatureCard
             title="DCA"
-            description="Dollar cost averaging with automated recurring buys."
+            description="Dollar cost averaging with automated recurring trades. Set your schedule and let the protocol handle execution."
             icon={<LayoutGrid className="h-5 w-5" />}
             href="/docs/dca-api/guide"
           />
           <FeatureCard
             title="Zap"
-            description="Single-transaction LP deposits and withdrawals."
+            description="Single-transaction LP deposits and withdrawals. Simplify complex DeFi operations into one action."
             icon={<Zap className="h-5 w-5" />}
             href="/docs/zap-api/api"
           />
           <FeatureCard
-            title="Gasless Swap"
-            description="Zero-gas trading for supported chains and tokens."
-            icon={<Shield className="h-5 w-5" />}
-            href="/docs/gasless-swap-api"
+            title="Widget"
+            description="Drop-in swap UI component. Embed OpenOcean's trading interface in your dApp with full customization."
+            icon={<Puzzle className="h-5 w-5" />}
+            href="/docs/widget"
+          />
+          <FeatureCard
+            title="AI Agents"
+            description="OpenOcean Skills for AI coding assistants. Natural language commands for quotes, swaps, and on-chain execution."
+            icon={<Bot className="h-5 w-5" />}
+            href="/docs/ai-agents"
+          />
+          <FeatureCard
+            title="Meme API"
+            description="Specialized API for meme token trading with optimized routing for high-volatility assets."
+            icon={<Zap className="h-5 w-5" />}
+            href="/docs/meme-api"
+            badge="New"
+          />
+          <FeatureCard
+            title="Solana API"
+            description="Native Solana support with Jupiter aggregation and Raydium liquidity for fast, low-cost swaps."
+            icon={<Globe className="h-5 w-5" />}
+            href="/docs/solana-swap-api"
           />
         </CardGroup>
       </section>
@@ -232,22 +253,28 @@ export function IntroductionContent() {
           Choose how you want to integrate:
         </p>
 
-        <div className="grid gap-3 md:grid-cols-3">
+        <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-4">
+          <NextStepCard
+            title="Quick Start"
+            description="Get your first swap working in 5 minutes."
+            href="/docs/swap-api/guide"
+            icon={<Zap className="h-5 w-5" />}
+          />
           <NextStepCard
             title="API Reference"
-            description="Full REST API documentation for quotes, swaps, and more."
-            href="/docs/swap-api"
-            icon={<Terminal className="h-5 w-5" />}
+            description="Full REST API documentation."
+            href="/docs/api-reference"
+            icon={<FileCode className="h-5 w-5" />}
           />
           <NextStepCard
             title="SDK"
-            description="Type-safe TypeScript SDK for rapid integration."
+            description="Type-safe TypeScript SDK."
             href="/docs/swap-api/sdk"
             icon={<Code2 className="h-5 w-5" />}
           />
           <NextStepCard
             title="Widget"
-            description="Drop-in swap UI component with full customization."
+            description="Drop-in swap UI component."
             href="/docs/widget"
             icon={<Puzzle className="h-5 w-5" />}
           />

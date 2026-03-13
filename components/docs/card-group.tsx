@@ -5,6 +5,7 @@ import Link from "next/link"
 import { motion } from "framer-motion"
 import { cn } from "@/lib/utils"
 import { ExternalLink, ArrowRight, ChevronRight } from "lucide-react"
+import { Badge } from "@/components/ui/badge"
 
 const cardStagger = { duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }
 
@@ -15,6 +16,7 @@ interface FeatureCardProps {
   href?: string
   external?: boolean
   className?: string
+  badge?: string
 }
 
 export function FeatureCard({
@@ -24,6 +26,7 @@ export function FeatureCard({
   href,
   external,
   className,
+  badge,
 }: FeatureCardProps) {
   const iconElement = icon != null
     ? (React.isValidElement(icon)
@@ -55,6 +58,14 @@ export function FeatureCard({
         {/* Title */}
         <h3 className="font-semibold text-foreground flex items-center gap-2 text-sm">
           {title}
+          {badge && (
+            <Badge
+              variant={badge === "New" ? "default" : "secondary"}
+              className="h-5 text-[10px] px-1.5"
+            >
+              {badge}
+            </Badge>
+          )}
           {href && (
             <ChevronRight className="h-3.5 w-3.5 opacity-0 -translate-x-1 group-hover:opacity-60 group-hover:translate-x-0 transition-all" />
           )}

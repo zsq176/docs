@@ -23,7 +23,8 @@ import {
   Puzzle,
   Bot,
   FileCode,
-  Command
+  Command,
+  BookOpen
 } from "lucide-react"
 import { useTheme } from "next-themes"
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet"
@@ -38,6 +39,7 @@ const iconMap: Record<string, React.ElementType> = {
   Puzzle,
   Bot,
   FileCode,
+  BookOpen,
 }
 
 export function Header() {
@@ -204,7 +206,7 @@ export function Header() {
       </div>
 
       {/* Primary Navigation - Category Tabs */}
-      <nav className="hidden lg:flex items-center gap-1 px-4 md:px-6 lg:px-8 h-11 overflow-x-auto">
+      <nav className="hidden lg:flex items-center gap-0.5 px-4 md:px-6 lg:px-8 h-11 overflow-x-auto scrollbar-none">
         {docsConfig.primaryNav.map((category) => {
           const Icon = iconMap[category.icon || "Home"]
           const isActive = currentCategory.title === category.title
@@ -214,13 +216,13 @@ export function Header() {
               key={category.title}
               href={category.href}
               className={cn(
-                "relative flex items-center gap-2 px-3 py-2 text-sm font-medium rounded-md transition-all whitespace-nowrap",
+                "relative flex items-center gap-1.5 px-3 py-2 text-sm font-medium rounded-md transition-all whitespace-nowrap",
                 isActive
                   ? "text-foreground"
-                  : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                  : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
               )}
             >
-              {Icon && <Icon className="h-4 w-4" />}
+              {Icon && <Icon className="h-3.5 w-3.5" />}
               <span>{category.title}</span>
               {isActive && (
                 <motion.div
