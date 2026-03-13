@@ -1,0 +1,42 @@
+# v0 runtime files
+__v0_runtime_loader.js
+__v0_devtools.tsx
+__v0_jsx-dev-runtime.ts
+
+# Common ignores
+node_modules/
+.next/
+.env*.local
+.DS_Store
+
+# Legacy location (code moved to repo root)
+ui/
+
+# Node.js
+node_modules/
+.npm/
+.next/
+.cache/
+dist/
+build/
+*.log
+
+# 忽略所有 .node 二进制文件
+*.node
+
+# 忽略 LevelDB 文件
+*.sst
+*.ldb
+*.log
+CURRENT
+MANIFEST-*
+LOCK
+
+# 忽略 DLL 文件
+*.dll
+*.so
+*.dylib
+
+# 系统文件
+.DS_Store
+Thumbs.db
